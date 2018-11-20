@@ -85,7 +85,7 @@ ynh_app_setting_set $app port $port
 # INSTALL PYLOAD
 #==============================================
 
-apt install -y python-pycurl python-qt4 python-crypto python-imaging python-openssl tesseract-ocr tesseract-ocr-eng rhino
+apt install -y python-crypto python-pycurl tesseract-ocr
 
 #python python-crypto python-pycurl python-openssl python-imaging tesseract-ocr rhino
 
