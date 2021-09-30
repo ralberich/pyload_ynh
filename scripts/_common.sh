@@ -5,7 +5,7 @@
 # COMMON VARIABLES
 #=================================================
 
-pkg_dependencies="python3-pip"
+pkg_dependencies="python3-pip build-essential libssl-dev libffi-dev python-dev"
 
 #=================================================
 # PERSONAL HELPERS
