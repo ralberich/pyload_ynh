@@ -84,13 +84,8 @@ ynh_app_setting_set $app port $port
 #==============================================
 # INSTALL PYLOAD
 #==============================================
-
-apt install -y python-crypto python-pycurl tesseract-ocr
-
-#python python-crypto python-pycurl python-openssl python-imaging tesseract-ocr rhino
-
-wget --no-verbose 'https://github.com/pyload/pyload/releases/download/v0.4.9/pyload_0.4.9_all.deb'
-dpkg --install pyload_0.4.9_all.deb
+apt install python3-pip
+pip3 install --pre pyload-ng[all]
 
 #=================================================
 # NGINX CONFIGURATION
