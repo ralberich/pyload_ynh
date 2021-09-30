@@ -90,7 +90,7 @@ ynh_install_app_dependencies $pkg_dependencies
 # INSTALL PYLOAD
 #==============================================
 ynh_script_progression --message="Installing Pyload..." --weight=1
-
+pip3 install --upgrade pip
 pip3 install --pre pyload-ng[all]
 
 #=================================================
