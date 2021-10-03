@@ -77,6 +77,7 @@ ynh_app_setting_set $app is_public $is_public
 
 # Find a free port
 port=$(ynh_find_port 8000)
+ynh_script_progression --message="Opening port $port..." --weight=1
 # Open this port
 yunohost firewall allow --no-upnp TCP $port 2>&1
 ynh_app_setting_set $app port $port
