@@ -1,0 +1,13 @@
+[Unit]
+Description=__APP__
+After=network.target
+
+[Service]
+Type=simple
+User=__APP__
+Group=__APP__
+WorkingDirectory=__FINALPATH__/
+ExecStart=/bin/sh -c 'pyload --storagedir __DOWNLOAD_PATH__ --userdir __FINALPATH__'
+
+[Install]
+WantedBy=multi-user.target

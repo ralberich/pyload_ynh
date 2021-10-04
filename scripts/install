@@ -281,7 +281,7 @@ chown $app:$app "$final_path/settings/pyload.cfg"
 # #=================================================
 # # SETUP SYSTEMD
 # #=================================================
-# ynh_script_progression --message="Configuring a systemd service..." --time --weight=1
+ynh_script_progression --message="Configuring a systemd service..." --time --weight=1
 
 # ### `ynh_systemd_config` is used to configure a systemd script for an app.
 # ### It can be used for apps that use sysvinit (with adaptation) or systemd.
@@ -295,7 +295,7 @@ chown $app:$app "$final_path/settings/pyload.cfg"
 # ###		- And the section "SETUP SYSTEMD" in the upgrade script
 
 # # Create a dedicated systemd config
-# ynh_add_systemd_config
+ynh_add_systemd_config
 
 # #=================================================
 # # SETUP APPLICATION WITH CURL
@@ -316,7 +316,7 @@ chown $app:$app "$final_path/settings/pyload.cfg"
 # ynh_local_curl "/INSTALL_PATH" "key1=value1" "key2=value2" "key3=value3"
 
 # # Remove the public access
-# ynh_permission_update --permission="main" --remove="visitors"
+ynh_permission_update --permission="main" --remove="visitors"
 
 # #=================================================
 # # GENERIC FINALIZATION
@@ -339,7 +339,7 @@ chown $app:$app "$final_path/settings/pyload.cfg"
 # #=================================================
 # # INTEGRATE SERVICE IN YUNOHOST
 # #=================================================
-# ynh_script_progression --message="Integrating service in YunoHost..." --time --weight=1
+ynh_script_progression --message="Integrating service in YunoHost..." --time --weight=1
 
 # ### `yunohost service add` integrates a service in YunoHost. It then gets
 # ### displayed in the admin interface and through the others `yunohost service` commands.
@@ -350,7 +350,7 @@ chown $app:$app "$final_path/settings/pyload.cfg"
 # ###		- As well as the section "INTEGRATE SERVICE IN YUNOHOST" in the restore script
 # ###		- And the section "INTEGRATE SERVICE IN YUNOHOST" in the upgrade script
 
-# yunohost service add $app --description="A short description of the app" --log="/var/log/$app/$app.log"
+yunohost service add $app --description="A python downloader" --log="$final_path/logs/$app.log"
 
 # ### Additional options starting with 3.8:
 # ###
@@ -371,7 +371,7 @@ chown $app:$app "$final_path/settings/pyload.cfg"
 # #=================================================
 # # START SYSTEMD SERVICE
 # #=================================================
-# ynh_script_progression --message="Starting a systemd service..." --time --weight=1
+ynh_script_progression --message="Starting a systemd service..." --time --weight=1
 
 # ### `ynh_systemd_action` is used to start a systemd service for an app.
 # ### Only needed if you have configure a systemd service
@@ -382,7 +382,7 @@ chown $app:$app "$final_path/settings/pyload.cfg"
 # ###		- And the section "STOP SYSTEMD SERVICE" and "START SYSTEMD SERVICE" in the change_url script
 
 # # Start a systemd service
-# ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$app/$app.log"
+ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$app/$app.log"
 
 # #=================================================
 # # SETUP FAIL2BAN
@@ -395,15 +395,15 @@ chown $app:$app "$final_path/settings/pyload.cfg"
 # #=================================================
 # # SETUP SSOWAT
 # #=================================================
-# ynh_script_progression --message="Configuring permissions..." --time --weight=1
+ynh_script_progression --message="Configuring permissions..." --time --weight=1
 
-# # Make app public if necessary
-# if [ $is_public -eq 1 ]
-# then
-# 	# Everyone can access the app.
-# 	# The "main" permission is automatically created before the install script.
-# 	ynh_permission_update --permission="main" --add="visitors"
-# fi
+# Make app public if necessary
+if [ $is_public -eq 1 ]
+then
+ 	# Everyone can access the app.
+ 	# The "main" permission is automatically created before the install script.
+ynh_permission_update --permission="main" --add="visitors"
+fi
 
 # ### N.B. : the following extra permissions only make sense if your app
 # ### does have for example an admin interface or an API.
@@ -419,12 +419,12 @@ chown $app:$app "$final_path/settings/pyload.cfg"
 # #=================================================
 # # RELOAD NGINX
 # #=================================================
-# ynh_script_progression --message="Reloading NGINX web server..." --time --weight=1
+ynh_script_progression --message="Reloading NGINX web server..." --time --weight=1
 
-# ynh_systemd_action --service_name=nginx --action=reload
+ynh_systemd_action --service_name=nginx --action=reload
 
 # #=================================================
 # # END OF SCRIPT
 # #=================================================
 
-# ynh_script_progression --message="Installation of $app completed" --time --last
+ynh_script_progression --message="Installation of $app completed" --time --last
