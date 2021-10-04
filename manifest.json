@@ -43,6 +43,16 @@
                 "example": "/pyload",
                 "default": "/pyload"
             },
+            {
+                "name": "download_path",
+                "type": "path",
+                "ask": {
+                    "en": "Choose a path for Download. pyload user will be granted access",
+                    "fr": "Choisissez un chemin pour le dossier de téléchargement. L'utilisateur Pyload obtiendra des droits sur ce dossier"
+                },
+                "example": "/media/Download",
+                "default": "/media/Download"
+            },
             
             {
                 "name": "is_public",
