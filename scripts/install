@@ -158,6 +158,8 @@ ynh_app_setting_set --app=$app --key=final_path --value=$final_path
 # But FOR THE LOVE OF GOD, do not allow r/x for "others" on the entire folder -
 # this will be treated as a security issue.
 mkdir -p $final_path
+mkdir -p $final_path/settings
+
 chmod 750 "$final_path"
 chmod -R o-rwx "$final_path"
 chown -R $app:$app "$final_path"
