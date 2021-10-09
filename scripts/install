@@ -235,14 +235,16 @@ ynh_script_progression --message="Handling Download Dir..." --time --weight=1
 
 if (test -e $download_path);
  then 
- download_owner=$(stat -c "%G" $download_path);
- if [ "$download_owner" = "root" ];
-  then ynh_die --message="Download path is owned by root group. Please change this so $app user can be added";
- else usermod -a -G $download_owner $app;
+ download_owner=$(stat -c "%U" $download_path);
+ group_owner=$(stat -c "%G" $download_path);
+ if [ "$group_owner" != "$app" ];
+  then 
+  chown -R $download_owner:$app "$download_path";
+  chmod 760 "$download_path";
  fi;
  else 
   mkdir -p $download_path;
-  chmod 750 "$download_path";
+  chmod 760 "$download_path";
   chmod -R o-rwx "$download_path";
   chown -R $app:$app "$download_path";
  fi;
