@@ -8,12 +8,12 @@
     "version": "0.4.20~ynh1",
     "url": "https://pyload.net/",
     "upstream": {
-        "license": "free",
+        "license": "AGPL-3.0-or-later",
         "website": "https://pyload.net",
         "admindoc": "https://github.com/pyload/pyload/wiki",
         "code": "https://github.com/pyload/pyload"
     },
-    "license": "free",
+    "license": "AGPL-3.0-or-later",
     "maintainer": {
         "name": "liberodark",
         "email": "liberodark@gmail.com"
