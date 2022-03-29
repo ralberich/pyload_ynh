@@ -6,7 +6,7 @@
 # IMPORT GENERIC HELPERS
 #=================================================
 
-#source _common.sh
+source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
@@ -14,8 +14,7 @@ source /usr/share/yunohost/helpers
 #=================================================
 
 ynh_clean_setup () {
-	### Remove this function if there's nothing to clean before calling the remove script.
-	true
+	ynh_clean_check_starting
 }
 # Exit if an error occurs during the execution of the script
 ynh_abort_if_errors
@@ -24,131 +23,169 @@ ynh_abort_if_errors
 # RETRIEVE ARGUMENTS FROM THE MANIFEST
 #=================================================
 
-# Retrieve arguments
 domain=$YNH_APP_ARG_DOMAIN
-path_url=$YNH_APP_ARG_PATH
+path_url="/"
 is_public=$YNH_APP_ARG_IS_PUBLIC
 
-### If it's a multi-instance app, meaning it can be installed several times independently
-### The id of the app as stated in the manifest is available as $YNH_APP_ID
-### The instance number is available as $YNH_APP_INSTANCE_NUMBER (equals "1", "2", ...)
-### The app instance name is available as $YNH_APP_INSTANCE_NAME
-###    - the first time the app is installed, YNH_APP_INSTANCE_NAME = ynhexample
-###    - the second time the app is installed, YNH_APP_INSTANCE_NAME = ynhexample__2
-###    - ynhexample__{N} for the subsequent installations, with N=3,4, ...
-### The app instance name is probably what interests you most, since this is
-### guaranteed to be unique. This is a good unique identifier to define installation path,
-### db names, ...
 app=$YNH_APP_INSTANCE_NAME
 
 #=================================================
 # CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
 #=================================================
+ynh_script_progression --message="Validating installation parameters..."
 
-### If the app uses nginx as web server (written in HTML/PHP in most cases), the final path should be "/var/www/$app".
-### If the app provides an internal web server (or uses another application server such as uwsgi), the final path should be "/opt/yunohost/$app"
-final_path=/opt/yunohost/$app
-test ! -e "$final_path" || ynh_die "This path already contains a folder"
+final_path=/var/www/$app
+test ! -e "$final_path" || ynh_die --message="This path already contains a folder"
 
-# Normalize the url path syntax
-path_url=$(ynh_normalize_url_path $path_url)
-
-# Check web path availability
-ynh_webpath_available $domain $path_url
 # Register (book) web path
-ynh_webpath_register $app $domain $path_url
+ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url
 
 #=================================================
 # STORE SETTINGS FROM MANIFEST
 #=================================================
+ynh_script_progression --message="Storing installation settings..."
 
-ynh_app_setting_set $app domain $domain
-ynh_app_setting_set $app path $path_url
-ynh_app_setting_set $app is_public $is_public
+ynh_app_setting_set --app=$app --key=domain --value=$domain
+ynh_app_setting_set --app=$app --key=path --value=$path_url
 
+#=================================================
+# STANDARD MODIFICATIONS
 #=================================================
 # FIND AND OPEN A PORT
 #=================================================
+ynh_script_progression --message="Finding an available port..."
 
-### Use these lines if you have to open a port for the application
-### `ynh_find_port` will find the first available port starting from the given port.
-### If you're not using these lines:
-###		- Remove the section "CLOSE A PORT" in the remove script
-
-# Find a free port
-port=$(ynh_find_port 8000)
-# Open this port
-yunohost firewall allow --no-upnp TCP $port 2>&1
-ynh_app_setting_set $app port $port
-
-#==============================================
-# INSTALL PYLOAD
-#==============================================
-
-apt install -y python-crypto python-pycurl tesseract-ocr
-
-#python python-crypto python-pycurl python-openssl python-imaging tesseract-ocr rhino
-
-wget --no-verbose 'https://github.com/pyload/pyload/releases/download/v0.4.9/pyload_0.4.9_all.deb'
-dpkg --install pyload_0.4.9_all.deb
+# Find an available port
+port=$(ynh_find_port --port=9666)
+ynh_app_setting_set --app=$app --key=port --value=$port
 
 #=================================================
-# NGINX CONFIGURATION
+# INSTALL DEPENDENCIES
 #=================================================
+ynh_script_progression --message="Installing dependencies..."
 
-# Create a dedicated nginx config
-ynh_add_nginx_config
+ynh_install_app_dependencies $pkg_dependencies
 
 #=================================================
 # CREATE DEDICATED USER
 #=================================================
+ynh_script_progression --message="Configuring system user..."
 
 # Create a system user
-ynh_system_user_create $app
+ynh_system_user_create --username=$app --home_dir="$final_path"
 
 #=================================================
-# MODIFY A CONFIG FILE
+# DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
-#cp -a ../conf/onlyoffice-documentserver.conf /etc/onlyoffice/documentserver/nginx/onlyoffice-documentserver.conf
-#ynh_replace_string "__NEXTCLOUDDOMAIN__" "$nextcloud_domain" "/etc/loolwsd/loolwsd.xml"
-#ynh_replace_string "__PASSWORD__" "$password" "/etc/loolwsd/loolwsd.xml"
+ynh_script_progression --message="Setting up source files..."
+
+ynh_app_setting_set --app=$app --key=final_path --value=$final_path
+# Download, check integrity, uncompress and patch the source from app.src
+mkdir -p "$final_path"
+
+chmod 750 "$final_path"
+chmod -R o-rwx "$final_path"
+chown -R $app:www-data "$final_path"
 
 #=================================================
-# STORE THE CONFIG FILE CHECKSUM
+# NGINX CONFIGURATION
 #=================================================
+ynh_script_progression --message="Configuring NGINX web server..."
 
-### `ynh_store_file_checksum` is used to store the checksum of a file.
-### That way, during the upgrade script, by using `ynh_backup_if_checksum_is_different`,
-### you can make a backup of this file before modifying it again if the admin had modified it.
+# Create a dedicated NGINX config
+ynh_add_nginx_config
 
-# Calculate and store the config file checksum into the app settings
-#ynh_store_file_checksum "/etc/onlyoffice/documentserver/nginx/onlyoffice-documentserver.conf"
+#=================================================
+# SPECIFIC SETUP
+#=================================================
+# INSTALL PYTHON DEPENDENCIES
+#=================================================
+ynh_script_progression --message="Installing Python dependencies..."
 
+pushd $final_path
+	python3 -m venv $final_path/venv
+	source $final_path/venv/bin/activate
+	pip install --upgrade pip
+	pip install --upgrade pyyaml
+	pip install --pre pyload-ng[all]
+popd
+
+#=================================================
+# CREATE DATA DIRECTORY
+#=================================================
+ynh_script_progression --message="Creating a data directory..."
+
+datadir=/home/yunohost.app/$app
+ynh_app_setting_set --app=$app --key=datadir --value=$datadir
+
+mkdir -p $datadir
+
+chmod 750 "$datadir"
+chmod -R o-rwx "$datadir"
+chown -R $app:www-data "$datadir"
+
+#=================================================
+# ADD A CONFIGURATION
+#=================================================
+ynh_script_progression --message="Adding a configuration file..."
+
+#=================================================
+# SETUP SYSTEMD
+#=================================================
+ynh_script_progression --message="Configuring a systemd service..."
+
+# Create a dedicated systemd config
+ynh_add_systemd_config
 
 #=================================================
 # GENERIC FINALIZATION
 #=================================================
-# SECURE FILES AND DIRECTORIES
+# SETUP LOGROTATE
 #=================================================
+ynh_script_progression --message="Configuring log rotation..."
 
-### For security reason, any app should set the permissions to root: before anything else.
-### Then, if write authorization is needed, any access should be given only to directories
-### that really need such authorization.
+mkdir -p /var/log/$app
+chown -R $app:$app "/var/log/$app" 
+# Use logrotate to manage application logfile(s)
+ynh_use_logrotate
 
-# Set permissions to app files
-#chown -R root: /etc/loolwsd
+#=================================================
+# INTEGRATE SERVICE IN YUNOHOST
+#=================================================
+ynh_script_progression --message="Integrating service in YunoHost..."
 
+yunohost service add $app --log="/var/log/$app/$app.log"
+
+#=================================================
+# START SYSTEMD SERVICE
+#=================================================
+ynh_script_progression --message="Starting a systemd service..."
+
+# Start a systemd service
+ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$app/$app.log" --line_match="Proxy listening"
 
 #=================================================
 # SETUP SSOWAT
 #=================================================
+ynh_script_progression --message="Configuring permissions..."
 
-# If app is public, add url to SSOWat conf as skipped_uris
-if [ $is_public -eq 1 ]; then
-  # unprotected_uris allows SSO credentials to be passed anyway.
-  ynh_app_setting_set "$app" unprotected_uris "/"
+# Make app public if necessary
+if [ $is_public -eq 1 ]
+then
+	# Everyone can access the app.
+	# The "main" permission is automatically created before the install script.
+	ynh_permission_update --permission="main" --add="visitors"
 fi
 
-# Reload services
-pyLoadCore --daemon
-systemctl restart nginx
+#=================================================
+# RELOAD NGINX
+#=================================================
+ynh_script_progression --message="Reloading NGINX web server..."
+
+ynh_systemd_action --service_name=nginx --action=reload
+
+#=================================================
+# END OF SCRIPT
+#=================================================
+
+ynh_script_progression --message="Installation of $app completed"
