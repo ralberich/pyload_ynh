@@ -14,7 +14,7 @@ Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour
 The free and open-source Download Manager written in pure Python
 
 
-**Version incluse :** 0.4.20~ynh1
+**Version incluse :** 0.4.20~ynh2
 
 
 
