@@ -18,7 +18,7 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 The free and open-source Download Manager written in pure Python
 
 
-**Shipped version:** 0.4.20~ynh1
+**Shipped version:** 0.4.20~ynh2
 
 
 
