@@ -105,13 +105,6 @@ then
 fi
 
 #=================================================
-# SPECIFIC MODIFICATIONS
-#=================================================
-# UPDATE A CONFIG FILE
-#=================================================
-ynh_script_progression --message="Updating a configuration file..."
-
-#=================================================
 # GENERIC FINALISATION
 #=================================================
 # START SYSTEMD SERVICE
