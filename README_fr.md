@@ -5,24 +5,25 @@ It shall NOT be edited by hand.
 
 # pyLoad pour YunoHost
 
-[![Niveau d'intégration](https://dash.yunohost.org/integration/pyload.svg)](https://dash.yunohost.org/appci/app/pyload) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/pyload.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/pyload.maintain.svg)  
+[![Niveau d’intégration](https://dash.yunohost.org/integration/pyload.svg)](https://dash.yunohost.org/appci/app/pyload) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/pyload.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/pyload.maintain.svg)
+
 [![Installer pyLoad avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=pyload)
 
 *[Read this readme in english.](./README.md)*
 
-> *Ce package vous permet d'installer pyLoad rapidement et simplement sur un serveur YunoHost.
-Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l'installer et en profiter.*
+> *Ce package vous permet d’installer pyLoad rapidement et simplement sur un serveur YunoHost.
+Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l’installer et en profiter.*
 
-## Vue d'ensemble
+## Vue d’ensemble
 
 The free and open-source Download Manager written in pure Python
 
 
 **Version incluse :** 0.4.20~ynh3
 
-## Captures d'écran
+## Captures d’écran
 
-![Capture d'écran de pyLoad](./doc/screenshots/sample.png)
+![Capture d’écran de pyLoad](./doc/screenshots/sample.png)
 
 ## Avertissements / informations importantes
 
@@ -33,10 +34,10 @@ The free and open-source Download Manager written in pure Python
 
 ## Documentations et ressources
 
-* Site officiel de l'app : <https://pyload.net>
-* Documentation officielle de l'admin : <https://github.com/pyload/pyload/wiki>
-* Dépôt de code officiel de l'app : <https://github.com/pyload/pyload>
-* Documentation YunoHost pour cette app : <https://yunohost.org/app_pyload>
+* Site officiel de l’app : <https://pyload.net>
+* Documentation officielle de l’admin : <https://github.com/pyload/pyload/wiki>
+* Dépôt de code officiel de l’app : <https://github.com/pyload/pyload>
+* YunoHost Store: <https://apps.yunohost.org/app/pyload>
 * Signaler un bug : <https://github.com/YunoHost-Apps/pyload_ynh/issues>
 
 ## Informations pour les développeurs
@@ -51,4 +52,4 @@ ou
 sudo yunohost app upgrade pyload -u https://github.com/YunoHost-Apps/pyload_ynh/tree/testing --debug
 ```
 
-**Plus d'infos sur le packaging d'applications :** <https://yunohost.org/packaging_apps>
+**Plus d’infos sur le packaging d’applications :** <https://yunohost.org/packaging_apps>
