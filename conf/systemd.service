@@ -1,5 +1,5 @@
 [Unit]
-Description=Python Downloader
+Description=PyLoad: Download Manager
 After=network.target
 
 [Service]
