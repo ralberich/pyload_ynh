@@ -5,7 +5,8 @@ It shall NOT be edited by hand.
 
 # pyLoad for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/pyload.svg)](https://dash.yunohost.org/appci/app/pyload) ![Working status](https://ci-apps.yunohost.org/ci/badges/pyload.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/pyload.maintain.svg)  
+[![Integration level](https://dash.yunohost.org/integration/pyload.svg)](https://dash.yunohost.org/appci/app/pyload) ![Working status](https://ci-apps.yunohost.org/ci/badges/pyload.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/pyload.maintain.svg)
+
 [![Install pyLoad with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=pyload)
 
 *[Lire ce readme en français.](./README_fr.md)*
@@ -36,7 +37,7 @@ The free and open-source Download Manager written in pure Python
 * Official app website: <https://pyload.net>
 * Official admin documentation: <https://github.com/pyload/pyload/wiki>
 * Upstream app code repository: <https://github.com/pyload/pyload>
-* YunoHost documentation for this app: <https://yunohost.org/app_pyload>
+* YunoHost Store: <https://apps.yunohost.org/app/pyload>
 * Report a bug: <https://github.com/YunoHost-Apps/pyload_ynh/issues>
 
 ## Developer info
