@@ -28,16 +28,14 @@ ynh_add_nginx_config
 #=================================================
 # INSTALL PYTHON DEPENDENCIES
 #=================================================
-ynh_script_progression --message="Installing Python dependencies..."
-
-ynh_secure_remove --file="$install_dir/venv"
+ynh_script_progression --message="Installing Python dependencies in venv..."
 
 pushd $install_dir
-	python3 -m venv $install_dir/venv
-	source $install_dir/venv/bin/activate
-	pip install --upgrade pip
-	pip install --upgrade pyyaml
-	pip install --pre pyload-ng[all]
+    ynh_secure_remove venv
+    python3 -m venv venv
+    venv/bin/pip install --upgrade pip
+    venv/bin/pip install --upgrade pyyaml
+    venv/bin/pip install --pre pyload-ng[all]
 popd
 
 #=================================================
