@@ -41,6 +41,8 @@ ram.runtime = "50M"
     [resources.data_dir]
 
     [resources.ports]
+    # FIXME : this is a hack, nowhere is it explicitely specific in the systemd conf or app conf that it should run on $port ...
+    main.default = 9666
 
     [resources.permissions]
     main.url = "/"
