@@ -28,6 +28,16 @@ ynh_script_progression --message="Configuring NGINX web server..."
 # Create a dedicated NGINX config
 ynh_add_nginx_config
 
+# Create a dedicated systemd config
+ynh_add_systemd_config
+
+mkdir -p /var/log/$app
+chown -R $app:$app "/var/log/$app" 
+# Use logrotate to manage application logfile(s)
+ynh_use_logrotate
+
+yunohost service add $app --log="/var/log/$app/$app.log"
+
 #=================================================
 # SPECIFIC SETUP
 #=================================================
@@ -41,33 +51,6 @@ pushd $install_dir
     venv/bin/pip install --upgrade pyyaml
     venv/bin/pip install --pre pyload-ng[all]
 popd
-
-#=================================================
-# SETUP SYSTEMD
-#=================================================
-ynh_script_progression --message="Configuring a systemd service..."
-
-# Create a dedicated systemd config
-ynh_add_systemd_config
-
-#=================================================
-# GENERIC FINALIZATION
-#=================================================
-# SETUP LOGROTATE
-#=================================================
-ynh_script_progression --message="Configuring log rotation..."
-
-mkdir -p /var/log/$app
-chown -R $app:$app "/var/log/$app" 
-# Use logrotate to manage application logfile(s)
-ynh_use_logrotate
-
-#=================================================
-# INTEGRATE SERVICE IN YUNOHOST
-#=================================================
-ynh_script_progression --message="Integrating service in YunoHost..."
-
-yunohost service add $app --log="/var/log/$app/$app.log"
 
 #=================================================
 # START SYSTEMD SERVICE
