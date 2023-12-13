@@ -1,13 +1,13 @@
 [Unit]
-Description=Python Downloader
+Description=PyLoad: Download Manager
 After=network.target
 
 [Service]
 Type=simple
 User=__APP__
 Group=__APP__
-WorkingDirectory=__FINALPATH__/
-ExecStart=__FINALPATH__/venv/bin/pyload --storagedir __DATADIR__
+WorkingDirectory=__INSTALL_DIR__/
+ExecStart=__INSTALL_DIR__/venv/bin/pyload --storagedir __DATA_DIR__
 StandardOutput=append:/var/log/__APP__/__APP__.log
 StandardError=inherit
 

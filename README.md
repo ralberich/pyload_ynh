@@ -16,7 +16,7 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 
 ## Overview
 
-The free and open-source Download Manager written in pure Python
+PyLoad is a free and open-source Download Manager written in pure Python.
 
 
 **Shipped version:** 0.4.20~ynh3
@@ -24,13 +24,6 @@ The free and open-source Download Manager written in pure Python
 ## Screenshots
 
 ![Screenshot of pyLoad](./doc/screenshots/sample.png)
-
-## Disclaimers / important information
-
--   Default username: `pyload`.
--   Default password: `pyload`.
-
-**It's highly recommended to change the default access credentials on first start**.
 
 ## Documentation and resources
 
