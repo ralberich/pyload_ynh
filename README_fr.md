@@ -19,7 +19,7 @@ Il NE doit PAS être modifié à la main.
 PyLoad est un gestionnaire de téléchargement open source écrit en Python.
 
 
-**Version incluse :** 0.4.20~ynh3
+**Version incluse :** 0.4.20~ynh4
 
 ## Captures d’écran
 

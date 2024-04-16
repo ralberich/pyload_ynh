@@ -19,7 +19,7 @@ NON debe editarse manualmente.
 PyLoad is a free and open-source Download Manager written in pure Python.
 
 
-**Versión proporcionada:** 0.4.20~ynh3
+**Versión proporcionada:** 0.4.20~ynh4
 
 ## Capturas de pantalla
 

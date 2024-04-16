@@ -9,7 +9,7 @@ It shall NOT be edited by hand.
 
 [![Install pyLoad with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=pyload)
 
-*[Read this README is other languages.](./ALL_README.md)*
+*[Read this README in other languages.](./ALL_README.md)*
 
 > *This package allows you to install pyLoad quickly and simply on a YunoHost server.*  
 > *If you don't have YunoHost, please consult [the guide](https://yunohost.org/install) to learn how to install it.*
@@ -19,7 +19,7 @@ It shall NOT be edited by hand.
 PyLoad is a free and open-source Download Manager written in pure Python.
 
 
-**Shipped version:** 0.4.20~ynh3
+**Shipped version:** 0.4.20~ynh4
 
 ## Screenshots
 
