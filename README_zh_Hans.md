@@ -3,7 +3,7 @@
 请勿手动编辑。
 -->
 
-# YunoHost 的 pyLoad
+# YunoHost 上的 pyLoad
 
 [![集成程度](https://dash.yunohost.org/integration/pyload.svg)](https://dash.yunohost.org/appci/app/pyload) ![工作状态](https://ci-apps.yunohost.org/ci/badges/pyload.status.svg) ![维护状态](https://ci-apps.yunohost.org/ci/badges/pyload.maintain.svg)
 
