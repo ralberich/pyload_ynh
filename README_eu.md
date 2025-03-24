@@ -5,7 +5,9 @@ EZ editatu eskuz.
 
 # pyLoad YunoHost-erako
 
-[![Integrazio maila](https://dash.yunohost.org/integration/pyload.svg)](https://dash.yunohost.org/appci/app/pyload) ![Funtzionamendu egoera](https://ci-apps.yunohost.org/ci/badges/pyload.status.svg) ![Mantentze egoera](https://ci-apps.yunohost.org/ci/badges/pyload.maintain.svg)
+[![Integrazio maila](https://apps.yunohost.org/badge/integration/pyload)](https://ci-apps.yunohost.org/ci/apps/pyload/)
+![Funtzionamendu egoera](https://apps.yunohost.org/badge/state/pyload)
+![Mantentze egoera](https://apps.yunohost.org/badge/maintained/pyload)
 
 [![Instalatu pyLoad YunoHost-ekin](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=pyload)
 
@@ -19,7 +21,7 @@ EZ editatu eskuz.
 PyLoad is a free and open-source Download Manager written in pure Python.
 
 
-**Paketatutako bertsioa:** 0.4.20~ynh4
+**Paketatutako bertsioa:** 0.4.20~ynh5
 
 ## Pantaila-argazkiak
 

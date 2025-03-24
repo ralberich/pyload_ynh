@@ -5,7 +5,9 @@ NON debe editarse manualmente.
 
 # pyLoad para YunoHost
 
-[![Nivel de integración](https://dash.yunohost.org/integration/pyload.svg)](https://dash.yunohost.org/appci/app/pyload) ![Estado de funcionamento](https://ci-apps.yunohost.org/ci/badges/pyload.status.svg) ![Estado de mantemento](https://ci-apps.yunohost.org/ci/badges/pyload.maintain.svg)
+[![Nivel de integración](https://apps.yunohost.org/badge/integration/pyload)](https://ci-apps.yunohost.org/ci/apps/pyload/)
+![Estado de funcionamento](https://apps.yunohost.org/badge/state/pyload)
+![Estado de mantemento](https://apps.yunohost.org/badge/maintained/pyload)
 
 [![Instalar pyLoad con YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=pyload)
 
@@ -19,7 +21,7 @@ NON debe editarse manualmente.
 PyLoad is a free and open-source Download Manager written in pure Python.
 
 
-**Versión proporcionada:** 0.4.20~ynh4
+**Versión proporcionada:** 0.4.20~ynh5
 
 ## Capturas de pantalla
 
