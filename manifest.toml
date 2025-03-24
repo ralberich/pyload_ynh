@@ -1,3 +1,5 @@
+#:schema https://raw.githubusercontent.com/YunoHost/apps/master/schemas/manifest.v2.schema.json
+
 packaging_format = 2
 
 id = "pyload"
@@ -5,7 +7,7 @@ name = "pyLoad"
 description.en = "Download Manager"
 description.fr = "Gestionnaire de téléchargement"
 
-version = "0.4.20~ynh4"
+version = "0.4.20~ynh5"
 
 maintainers = []
 
@@ -43,13 +45,11 @@ ram.runtime = "50M"
 
     [resources.data_dir]
 
-    [resources.ports]
-    # FIXME : this is a hack, nowhere is it explicitely specific in the systemd conf or app conf that it should run on $port ...
-    main.default = 9666
-
     [resources.permissions]
     main.url = "/"
 
+    [resources.ports]
+    main.default = 9666
+
     [resources.apt]
     packages = "python3-cryptography, python3-pycurl, python3-venv, libcurl4-openssl-dev, libssl-dev, python3-dev"
-
